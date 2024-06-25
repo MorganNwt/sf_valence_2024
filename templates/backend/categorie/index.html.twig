@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block body %}
-     <h1>Administration des catégories</h1>
-     <table>
+    <section class="container mt-2">
+          <h1 class="text-center">Administration des catégories</h1>
+     <table class="mt-4">
         <thead>
             <tr>
                 <th>ID</th>
@@ -26,11 +27,14 @@
                      <td>{{ categorie.createdAt|date('Y/m/d H:i:s')  }}</td>
                      <td>{{ categorie.updatedAt|date('Y/m/d H:i:s')  }}</td>
                      <td>
+                     <div class="cell-flex">
                         <a href="{{ path('admin.categories.update', {id: categorie.id}) }}">Modifier</a>
                        {% include 'backend/Categorie/_form.html.twig' %}
-                     </td>
+                    </div>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
      </table>
+    </section>
 {% endblock %}

@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid $text-color;
+    text-align: center;
+
+    th, 
+    td{
+        border: 1px solid $text-color;
+        padding: 1em 0;
+
+        .cell-flex{
+            @include flex($justify: space-around); 
+        }
+    }
+}
