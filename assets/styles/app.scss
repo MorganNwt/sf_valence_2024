@@ -2,12 +2,16 @@
 // Import abstract
 @import "abstract/variables";
 @import "abstract/mixins";
+@import "abstract/functions";
 
 // Import vendors
 @import "vendors/bootstrap";
 
 // Import reset
 @import"base/structure";
+
+//Import Layout
+@import"layout/header";
 
 // Import components
 @import"components/utils";
