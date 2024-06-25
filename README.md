@@ -10,3 +10,6 @@ symfony console list // pour voir la liste des commandes disponibles
 symfony console make:form // pour créer un formulaire
 symfony console make:controller Backend\CategorieController // pour créer une catégorie
 symfony console debug:router // pour voir les routes et debuger si besoin
+
+yarn watch // a lancer pour valider les modifications css ctrl + c pour couper yarn watch
+
