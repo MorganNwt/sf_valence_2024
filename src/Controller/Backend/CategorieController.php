@@ -84,7 +84,7 @@ class CategorieController extends AbstractController
             $this->em->persist($categorie);
             $this->em->flush();
 
-            $this->addFlash('sucess', 'La catégorie a bien étét modifiée');
+            $this->addFlash('success', 'La catégorie a bien étét modifiée');
 
             return $this->redirectToRoute('admin.categories.index');
        }
