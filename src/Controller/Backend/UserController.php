@@ -52,5 +52,27 @@ class UserController extends AbstractController
         return $this->render('Backend/User/update.html.twig', [
             'form'=> $form,
         ]);
+
+    }
+
+    #[route('/{id}/delete', name: '.delete', methods: ['POST'])]
+    public function delete(?User $user, Request $request): Response|RedirectResponse
+    {
+        if(!$user){
+            $this->addFlash('error', 'Utilisateur introuvable');
+
+            return $this->redirectToRoute('admin.users.index');
+        }
+
+        if($this->isCsrfTokenValid('delete'. $user->getId(), $request->request->get('token'))) {
+            $this->em->remove($user);
+            $this->em->flush();
+
+            $this->addFlash('success', 'L\utilisateur à bien été supprimé');
+        }else{
+            $this->addFlash('error', 'Le token csrf est invalide');
+        }  
+
+        return $this->redirectToRoute('admin.users.index');
     }
 }
