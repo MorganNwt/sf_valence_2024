@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin des users
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <section class="container mt-2">
+        <h1 class="text-center">Administration des users</h1>
+        <a href="{{ path('app.register') }}" class="btn btn-primary"> Créer un utilisateur</a>
+        <div class="row mt-2 gy-4">
+            {% for user in users %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <h4>
+                            {{ user.fullName}}
+                        </h4>
+                        <p>
+                            Email:
+                            {{ user.email }}
+                        </p>
+                        <p>
+                            Roles:
+                            {{ user.roles|join(', ')|replace( { '_': ' '})|lower }}
+                        </p>
+                        <div class="card-btn">
+                            <a href=" {{ path('admin.users.update', {id:user.id}) }}" class="btn btn-warning">Modifier</a>
+                            {% include 'backend/user/delete.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
