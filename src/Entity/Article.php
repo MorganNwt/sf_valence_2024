@@ -9,8 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_TITLE', fields: ['title'])]
-#[UniqueEntity(fields:['title'], message: 'Cet article existe déjà')]
+#[ORM\UniqueConstraint(name: 'UNIQ_ARTICLE_TITLE', fields: ['title'])]
+#[UniqueEntity(fields:['title'], message: 'Le titre est déjà utilisé par un autre article')]
+#[ORM\HasLifecycleCallbacks]
 class Article
 {
     #[ORM\Id]
@@ -32,7 +33,6 @@ class Article
     private ?bool $enable = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -91,6 +91,16 @@ class Article
         return $this;
     }
 
+    #[ORM\PrePersist]
+    public function autoSetCreatedAt(): static
+    {
+        if(!$this->createdAt){
+            $this->createdAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
@@ -99,6 +109,14 @@ class Article
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function autoSetUpdatedAt() : static
+    {
+        $this->updatedAt = new \DateTimeImmutable();
 
         return $this;
     }
