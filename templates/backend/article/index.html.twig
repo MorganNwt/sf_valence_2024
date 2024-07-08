@@ -18,6 +18,7 @@
                         <p> {{ article.content|length > 150 ? article.conten|slice(0, 150) ~ '...': article.content }}</p>
                         <div class="card-btn">
                             <a href="{{ path('admin.articles.update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
+                            {% include "Backend/article/_deleteForm.html.twig" %}
                         </div>
                     </div>
                 </div>

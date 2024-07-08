@@ -89,8 +89,8 @@ class ArticleController extends AbstractController
        ]);
     }
 
-    #[route('/{id}/delete', name: ' delete', methods: ['POST'] )]
-    public function delete(?Article $article, Request $request): Response
+    #[route('/{id}/delete', name: '.delete', methods: ['POST'] )]
+    public function delete(?Article $article, Request $request): RedirectResponse
     {
         if(!$article){
             $this->addFlash('error', 'L\'article demandé n\'existe pas');
@@ -107,6 +107,5 @@ class ArticleController extends AbstractController
         }
 
         return $this->redirectToRoute('admin.articles.index');
-        
     }
 }
