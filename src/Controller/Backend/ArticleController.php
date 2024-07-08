@@ -62,8 +62,8 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{title}/update', name: '.update', methods: ['GET', 'POST'])]
-    public function update(?Article $article, Request $request): Response
+    #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
+    public function update(?Article $article, Request $request): Response|RedirectResponse
     {
        if(!$article){
         $this->addFlash('error', 'L\'article demandé n\'éxiste pas');
