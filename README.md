@@ -13,3 +13,8 @@ symfony console debug:router // pour voir les routes et debuger si besoin
 
 yarn watch // a lancer pour valider les modifications css ctrl + c pour couper yarn watch
 
+
+-------------------------------------------
+https://localhost:8000/admin/articles
+admin@test.com // Test1234
+------------------------------------------

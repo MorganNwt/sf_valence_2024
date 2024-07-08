@@ -22,10 +22,10 @@ class ArticleController extends AbstractController
     }
     
     #[Route('', name: '.index', methods: ['GET'])]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('backend/article/index.html.twig', [
-            'controller_name' => 'ArticleController',
+            'articles' => $articleRepository->findall(),
         ]);
     }
 
@@ -60,5 +60,53 @@ class ArticleController extends AbstractController
         return $this->render('backend/article/create.html.twig', [
            'form' => $form
         ]);
+    }
+
+    #[Route('/{title}/update', name: '.update', methods: ['GET', 'POST'])]
+    public function update(?Article $article, Request $request): Response
+    {
+       if(!$article){
+        $this->addFlash('error', 'L\'article demandé n\'éxiste pas');
+
+        return $this->redirectToRoute('admin.articles.index');
+       }
+
+       $form = $this->createForm(ArticleType::class, $article);
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid()){
+
+            $this->em->persist($article);
+            $this->em->flush();
+
+            $this->addFlash('success', 'L\'article a bien été modifiée');
+
+            return $this->redirectToRoute('admin.articles.index');
+       }
+
+       return $this->render('backend/article/update.html.twig',[
+        'form' => $form,
+       ]);
+    }
+
+    #[route('/{id}/delete', name: ' delete', methods: ['POST'] )]
+    public function delete(?Article $article, Request $request): Response
+    {
+        if(!$article){
+            $this->addFlash('error', 'L\'article demandé n\'existe pas');
+
+            return $this->redirectToRoute('admin.articles.index');
+        }
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('token'))) {
+            $this->em->remove($article);
+             $this->em->flush();
+
+             $this->addFlash('sucess', 'L\'article a bien été suprimée');    
+        }else {
+            $this->addFlash('error', 'Le jeton CSRF est invalide');
+        }
+
+        return $this->redirectToRoute('admin.articles.index');
+        
     }
 }
