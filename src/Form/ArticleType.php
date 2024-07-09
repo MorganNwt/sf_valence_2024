@@ -8,6 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use App\Repository\CategorieRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -48,9 +49,19 @@ class ArticleType extends AbstractType
                 ],
                 'required' => true,
             ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image',
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'image actuelle',
+                'download_uri' => false,
+                'download_label' => false,
+                'image_uri' => true,
+                'asset_helper' => true
+            ])
             ->add('enable', CheckboxType::class,[
                 'label' => 'Actif',
-                'required' => 'false',
+                'required' => false,
             ]);
            
     }

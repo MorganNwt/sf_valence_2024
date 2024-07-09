@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+
 #[Route('/admin/articles', name: 'admin.articles')]
 class ArticleController extends AbstractController
 {
