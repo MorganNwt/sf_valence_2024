@@ -15,7 +15,13 @@
                     <div class="card">
                         <h4>{{ article.title }}</h4>
                         <em>{{ article.createdAt|format_datetime('full','none') }}</em>
+                        <p> {{ article.user.fullName}}</p>
                         <p> {{ article.content|length > 150 ? article.conten|slice(0, 150) ~ '...': article.content }}</p>
+                        <p>
+                            {% for categorie in article.categories %}
+                                #{{ categorie.name}}
+                            {% endfor %}
+                        </p>
                         <div class="card-btn">
                             <a href="{{ path('admin.articles.update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
                             {% include "Backend/article/_deleteForm.html.twig" %}

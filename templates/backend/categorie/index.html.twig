@@ -28,7 +28,7 @@
                      <td>{{ categorie.updatedAt|date('Y/m/d H:i:s')  }}</td>
                      <td>
                      <div class="cell-flex">
-                        <a href="{{ path('admin.categories.update', {id: categorie.id}) }}">Modifier</a>
+                        <a href="{{ path('admin.categories.update', {id: categorie.id}) }}" class="btn btn-warning"">Modifier</a>
                        {% include 'backend/Categorie/_form.html.twig' %}
                     </div>
                     </td>

@@ -45,6 +45,8 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid() ){
             // $categorie->setCreatedAt( new \DateTimeImmutable() );
 
+            // pour récupérer automatiquement l'utilisateur connecté pour la relation ManyToOne
+            $article->setUser($this->getUser()); 
             // On met en file d'attente l'objet à persister
             $this->em->persist($article);
 
