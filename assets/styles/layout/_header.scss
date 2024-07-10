@@ -4,6 +4,7 @@
     top: 0;
     width: 100%;
     color:getTextColor($primary);
+    z-index: 9999999999;
 
     &-content{
         @include flex(flex-start, center, $gap: 2em);
