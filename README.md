@@ -18,3 +18,5 @@ yarn watch // a lancer pour valider les modifications css ctrl + c pour couper y
 https://localhost:8000/admin/articles
 admin@test.com // Test1234
 ------------------------------------------
+
+ {{ dump(app.request.get('_route'))  }}  // nom de la route sur laquel tu est
