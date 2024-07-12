@@ -3,8 +3,12 @@
     box-shadow: $box-shadow-card;
     padding: 1em;
     background: $white-dark;
-    margin-top: 5em;
 
+    &:not(form) {
+        margin-top: 5em;
+    }
+
+    
     &-img {
         width: 90%;
         aspect-ratio: 16/9;
