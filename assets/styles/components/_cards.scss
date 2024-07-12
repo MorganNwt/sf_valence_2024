@@ -22,5 +22,10 @@
     &-btn {
         @include flex(flex-start, $gap: 1em);
     }
+
+    a {
+        display: block;
+
+    }
 }
 
